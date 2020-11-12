@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const router = Router();
-const { list, get, deleteOne, save, follow, query } = require('./middlewares/index')
+const { list, get, deleteOne, save, follow, query, update } = require('./middlewares/index')
 const secure = require('./middlewares/secure')
 
 router.route("/")
     .get(list)
-    .put(secure('update'), save)
+    .put(secure('update'), update)
     .post(save);
 
 router.route("/:id")
@@ -15,5 +15,5 @@ router.route("/:id")
 router.route('/follow/:id')
     .get(secure('query'), query)
     .post(secure('follow'), follow)
-    
+
 module.exports = router;

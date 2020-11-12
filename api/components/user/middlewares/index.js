@@ -42,7 +42,20 @@ middlewares.save = (req, res) => {
             response.success(req, res, data, 200)
         })
         .catch((error) => {
-            response.error(req, res, error.message, 400)
+            response.error(req, res, error.message, error.status)
+        })
+
+}
+
+middlewares.update = (req, res) => {
+    const { id, name, password, username } = req.body
+    const data = { id, name, password, username }
+    controller.update(data)
+        .then((data) => {
+            response.success(req, res, data, 200)
+        })
+        .catch((error) => {
+            response.error(req, res, error.message, error.status)
         })
 
 }

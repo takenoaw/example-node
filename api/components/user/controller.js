@@ -23,13 +23,29 @@ module.exports = (injectedStore) => {
         }
         user.id = nanoid()
         if (data.password || data.username) {
-            await auth.upsert({
+            await auth.insert({
                 id: user.id,
                 username: data.username,
                 password: data.password
             });
         }
-        return store.upsert(TABLE, user);
+        return store.insert(TABLE, user);
+    }
+
+    const update = async (data) => {
+        const user = {
+            name: data.name,
+            username: data.username,
+        }
+        user.id = nanoid()
+        if (data.password || data.username) {
+            await auth.update({
+                id: user.id,
+                username: data.username,
+                password: data.password
+            });
+        }
+        return store.update(TABLE, user);
     }
 
     const follow = (from, to) => {
@@ -49,6 +65,7 @@ module.exports = (injectedStore) => {
         remove,
         save,
         follow,
-        query
+        query,
+        update
     }
 }

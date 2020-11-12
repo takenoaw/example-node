@@ -28,19 +28,22 @@ middleware.deleteOne = (req, res, next) => {
         success(req, res, data, 200)
     })
         .catch((e) => {
-            error(req, res, 'something went wrong', 400)
+            error(req, res, 'you cannot delet this one', 400)
         });
 }
+
 middleware.save = (req, res, next) => {
     const data = req.body;
     const { table } = req.params
-    store.insert(table, data).then((data) => {
-        success(req, res, data, 200)
-    })
+    store.insert(table, data)
+        .then((data) => {
+            success(req, res, data, 200)
+        })
         .catch((e) => {
-            error(req, res, 'something went wrong', 400)
+            error(req, res, 'you cannot save this user', 400)
         });
 }
+
 middleware.update = (req, res, next) => {
     const data = req.body;
     const { table } = req.params
@@ -48,7 +51,7 @@ middleware.update = (req, res, next) => {
         success(req, res, data, 200)
     })
         .catch((e) => {
-            error(req, res, 'something went wrong', 400)
+            error(req, res, 'you cannot update this user', 400)
         });
 }
 
